@@ -4,8 +4,8 @@ package com.walmart.service.api;
 import com.walmart.config.ConfigProperties;
 import com.walmart.dto.Product;
 import com.walmart.exceptions.BadRequestException;
-import com.walmart.platform.reponse.DataResponse;
 import com.walmart.response.BaseResponse;
+import com.walmart.response.DataResponse;
 import com.walmart.service.ProductServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +25,7 @@ import java.util.List;
 public class ProductController {
     @Autowired
     protected ConfigProperties configProperties;
+
     @Autowired
     ProductServiceFactory productServiceFactory;
 

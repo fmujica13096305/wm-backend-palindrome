@@ -3,7 +3,7 @@ package com.walmart.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.walmart.platform.paging.PageState;
+import com.walmart.utils.PageState;
 
 import java.io.Serializable;
 import java.util.HashMap;
