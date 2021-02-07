@@ -25,7 +25,7 @@ RUN mkdir -p /var/log/supervisor
 
 RUN echo "supervisord -c /etc/supervisord.conf" >> /root/.bashrc
 
-COPY ./resources/supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 
 RUN ls *
 
@@ -55,7 +55,7 @@ COPY ./resources/products.json  /database/products.json
 COPY ./resources/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
 COPY ./resources/java.env /java.env
 
-COPY ./resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
