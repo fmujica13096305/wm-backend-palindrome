@@ -71,7 +71,7 @@ RUN cp -a /target/wm-backend-palindrome-0.0.1-SNAPSHOT.jar /opt/springboot-launc
     && rm -rf "$HOME/.m2"
 
 VOLUME /tmp
-ADD springboot-launcher /opt/springboot-launcher
+ADD ./resources/springboot-launcher /opt/springboot-launcher
 RUN chmod +x /opt/springboot-launcher/*.sh
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
