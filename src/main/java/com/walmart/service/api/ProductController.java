@@ -31,10 +31,10 @@ public class ProductController {
 
     @CrossOrigin
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ResponseEntity<BaseResponse> searchProduct(@RequestParam("request") String request) {
+    public ResponseEntity<BaseResponse> searchProduct(@RequestParam("query") String query) {
         //checkRequest(bindingResult);
 
-        List<Product> productList = productServiceFactory.get(configProperties.getDocumentImplementation()).search(request);
+        List<Product> productList = productServiceFactory.get(configProperties.getDocumentImplementation()).search(query);
         return this.createSuccessResponse(productList, "SuccessFull Search");
 
     }
