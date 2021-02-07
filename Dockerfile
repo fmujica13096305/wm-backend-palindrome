@@ -60,10 +60,9 @@ ENV MONGO_DATABASE=promotions
 #ENV MONGO_INITDB_ROOT_USERNAME=productListUser
 #ENV MONGO_INITDB_ROOT_PASSWORD=productListPassword
 
-COPY ./database/products.json  /database/products.json
-COPY ./entrypoint/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
-COPY ./java.env /java.env
-
+COPY ./resources/products.json  /database/products.json
+COPY ./resources/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
+COPY ./resources/java.env /java.env
 
 # not sure why you need to `install` the package in the local repository?
 RUN mvn -T 4 clean package -Dmaven.test.skip=true
@@ -78,3 +77,5 @@ RUN chmod +x /opt/springboot-launcher/*.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
+
