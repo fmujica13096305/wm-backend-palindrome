@@ -53,7 +53,7 @@ ENV MONGO_DATABASE=promotions
 
 COPY ./resources/products.json  /database/products.json
 COPY ./resources/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
-COPY ./java.env /java.env
+COPY ./resources/java.env /java.env
 
 COPY ./resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
