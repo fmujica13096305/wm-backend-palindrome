@@ -25,7 +25,7 @@ RUN mkdir -p /var/log/supervisor
 
 RUN echo "supervisord -c /etc/supervisord.conf" >> /root/.bashrc
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY ./resources/supervisord.conf /etc/supervisord.conf
 
 RUN ls *
 
@@ -51,21 +51,10 @@ ENV MONGO_DATABASE=promotions
 #ENV MONGO_INITDB_ROOT_USERNAME=productListUser
 #ENV MONGO_INITDB_ROOT_PASSWORD=productListPassword
 
-COPY ./database/products.json  /database/products.json
-COPY ./entrypoint/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
+COPY ./resources/products.json  /database/products.json
+COPY ./resources/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
 COPY ./java.env /java.env
 
-
-# not sure why you need to `install` the package in the local repository?
-RUN mvn -T 4 clean package -Dmaven.test.skip=true
-RUN mkdir /opt/springboot-launcher
-RUN cp -a /target/wps-backend-1.0.0-spring-boot.jar /opt/springboot-launcher/wps-backend-1.0.0.jar \
-    && rm -rf "$HOME/.m2"
-
-VOLUME /tmp
-ADD springboot-launcher /opt/springboot-launcher
-RUN chmod +x /opt/springboot-launcher/*.sh
-
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
