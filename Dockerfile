@@ -33,7 +33,7 @@ RUN mkdir -p /var/log/supervisor
 RUN echo "supervisord -c /etc/supervisord.conf" >> /root/.bashrc
 
 # Copy config file for Supervisor (Custom supervisord.conf)
-COPY supervisord.conf /etc/supervisord.conf
+COPY ./resources/supervisord.conf /etc/supervisord.conf
 
 
 RUN ls *
@@ -74,7 +74,7 @@ VOLUME /tmp
 ADD resources /opt/springboot-launcher
 RUN chmod +x /opt/springboot-launcher/*.sh
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
 
