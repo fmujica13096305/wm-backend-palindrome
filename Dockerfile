@@ -58,3 +58,5 @@ COPY ./resources/java.env /java.env
 COPY ./resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+
+
