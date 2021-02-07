@@ -1,4 +1,4 @@
-package com.walmart;
+package com.walmart.config;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

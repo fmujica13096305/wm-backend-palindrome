@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(Constants.PRODUCT_IMPLEMENTATION_DUMMY)
+@Service(Constants.DUMMY_IMPLEMENTATION)
 public class ProductServiceDummy implements ProductService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceDummy.class);
@@ -18,9 +18,7 @@ public class ProductServiceDummy implements ProductService {
     public List<Product> search(String query) {
 
         LOGGER.info("*****  IN  *****");
-
-        System.out.println("*****  FERNANDO *****");
-
+        System.out.println("*****  DUMMY ENTERED *****");
         List<Product> productList = new ArrayList<>();
         Product product = getProduct("https://www.lider.cl/catalogo/images/bedRoomIcon.svg", 1, "Dummy Brand1", "Dummy Product1", 123);
         Product product2 = getProduct("https://www.lider.cl/catalogo/images/toysIcon.svg", 2, "Dummy Brand2", "Dummy Product2", 124);
