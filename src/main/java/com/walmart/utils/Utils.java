@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.walmart.dto.Product;
 import org.bson.Document;
 
-public class VOUtils {
+public class Utils {
     public static boolean exists(String brand) {
         return null != brand && !brand.isEmpty();
     }
@@ -23,7 +23,7 @@ public class VOUtils {
         return true;
     }
 
-    public static boolean isWordPalindrome(String word) {
+    public static boolean isPalindrome(String word) {
         StringBuffer buffer = new StringBuffer(word);
         buffer.reverse();
         String reverseWord = buffer.toString();
@@ -33,6 +33,6 @@ public class VOUtils {
     public static Product documentToProduct(Document document) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return (Product) mapper.readValue(document.toJson(), Product.class);
+        return mapper.readValue(document.toJson(), Product.class);
     }
 }

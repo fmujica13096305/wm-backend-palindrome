@@ -4,7 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.walmart.client.MongoClientConfiguration;
-import com.walmart.utils.VOUtils;
+import com.walmart.utils.Utils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.context.ApplicationContext;
@@ -21,8 +21,8 @@ public class ProductModel {
     private static Document queryBuilder(ProductQuery productQuery) {
         List<Bson> conditions = new ArrayList<>();
         checkAndAddEqualsCondition(conditions, productQuery.getId() > 0, "id", productQuery.getId());
-        checkAndAddContainsCondition(conditions, VOUtils.exists(productQuery.getBrand()), "brand", productQuery.getBrand());
-        checkAndAddContainsCondition(conditions, VOUtils.exists(productQuery.getDescription()), "description", productQuery.getDescription());
+        checkAndAddContainsCondition(conditions, Utils.exists(productQuery.getBrand()), "brand", productQuery.getBrand());
+        checkAndAddContainsCondition(conditions, Utils.exists(productQuery.getDescription()), "description", productQuery.getDescription());
         return new Document("$or", conditions);
     }
 

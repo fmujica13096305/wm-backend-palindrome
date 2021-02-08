@@ -3,14 +3,12 @@ package com.walmart.service.api;
 
 import com.walmart.config.ConfigProperties;
 import com.walmart.dto.Product;
-import com.walmart.exceptions.BadRequestException;
 import com.walmart.response.BaseResponse;
 import com.walmart.response.DataResponse;
 import com.walmart.service.ProductServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,20 +30,11 @@ public class ProductController {
     @CrossOrigin
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ResponseEntity<BaseResponse> searchProduct(@RequestParam("query") String query) {
-        //checkRequest(bindingResult);
-
         List<Product> productList = productServiceFactory.get(configProperties.getDocumentImplementation()).search(query);
         return this.createSuccessResponse(productList, "SuccessFull Search");
-
     }
 
-    protected void checkRequest(BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new BadRequestException(bindingResult);
-        }
-    }
-
-    protected ResponseEntity<BaseResponse> createSuccessResponse(Object resultData, String message) {
+    private ResponseEntity<BaseResponse> createSuccessResponse(Object resultData, String message) {
         return this.createOkResponse(resultData, message, HttpStatus.OK);
     }
 
