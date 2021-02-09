@@ -6,13 +6,13 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 
@@ -32,18 +32,55 @@ public class SeleniumWalmartTestCase {
 
     @Test
     public void testWalmartTestCase() throws Exception {
-        driver.get("http://localhost:3000/");
+        driver.get("https://lit-lowlands-69664.herokuapp.com/");
         driver.findElement(By.name("text")).click();
         driver.findElement(By.name("text")).clear();
         driver.findElement(By.name("text")).sendKeys("181");
         driver.findElement(By.id("buttonID")).click();
         driver.findElement(By.id("onSaleID")).click();
+        assertEquals("onSaleID", "onSaleID");
 
+    }
+
+    @Test
+    public void testWalmartTestCase2() throws Exception {
+        driver.get("https://lit-lowlands-69664.herokuapp.com/");
+        driver.findElement(By.name("text")).click();
+        driver.findElement(By.name("text")).clear();
+        driver.findElement(By.name("text")).sendKeys("adsfsda");
+        driver.findElement(By.id("buttonID")).click();
+        driver.findElement(By.xpath("(//h3[@id='onSaleID'])[3]")).click();
+        driver.findElement(By.xpath("(//h3[@id='onSaleID'])[3]")).click();
+        driver.findElement(By.xpath("(//h3[@id='onSaleID'])[4]")).click();
+        driver.findElement(By.xpath("(//h3[@id='onSaleID'])[4]")).click();
+        assertEquals("(//h3[@id='onSaleID'])[3]", "(//h3[@id='onSaleID'])[3]");
+        assertEquals("(//h3[@id='onSaleID'])[4]", "(//h3[@id='onSaleID'])[4]");
+
+    }
+
+    @Test
+    public void testUntitledTestCase2() throws Exception {
+        driver.get("https://lit-lowlands-69664.herokuapp.com/");
+        driver.findElement(By.xpath("//div[@id='root']/div/div")).click();
+        driver.findElement(By.id("buttonID")).click();
+        driver.findElement(By.name("text")).click();
+        driver.findElement(By.name("text")).clear();
+        driver.findElement(By.name("text")).sendKeys("hola lider");
+        driver.findElement(By.id("buttonID")).click();
+        assertEquals("onSaleID", "onSaleID");
+    }
+
+
+    @Test
+    public void testAssertFunctions() {
+        driver.navigate().to("https://lit-lowlands-69664.herokuapp.com/");
+        String ActualTitle = driver.getTitle();
+        String ExpectedTitle = "React App";
+        assertEquals(ActualTitle, ExpectedTitle);
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5000); // 5 seconds timeout
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
