@@ -5,7 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.walmart.constants.Constants;
 import com.walmart.dto.Product;
 import com.walmart.model.ProductModel;
-import com.walmart.model.ProductQuery;
+import com.walmart.model.ProductRequest;
 import com.walmart.utils.Utils;
 import org.bson.Document;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,8 @@ public class ProductServiceDefault implements ProductService {
     public List<Product> search(String query) {
 
         ProductModel productModel = new ProductModel();
-        ProductQuery productQuery = generateSearchQuery(query);
-        FindIterable<Document> documents = productModel.searchProduct(productQuery);
+        ProductRequest productRequest = generateSearchQuery(query);
+        FindIterable<Document> documents = productModel.searchProduct(productRequest);
         List<Product> productList = validatePrice(toProductList(documents), query);
         return productList;
     }
@@ -34,7 +34,7 @@ public class ProductServiceDefault implements ProductService {
             }
         } else {
             for (Product product : unCheckedProductList) {
-                productListForSale.add(normalPrizeProduct(product));
+                productListForSale.add(normalPriceProduct(product));
             }
         }
         return productListForSale;
@@ -42,11 +42,10 @@ public class ProductServiceDefault implements ProductService {
 
     private Product onSaleProduct(Product product) {
         product.setOnSalePrice(product.getPrice() * ((Constants.PERCENT_100 - Constants.DISCOUNT_PERCENTAGE) / Constants.PERCENT_100));
-        System.out.println(product.getOnSalePrice() + "/" + product.getPrice() * ((Constants.PERCENT_100 - Constants.DISCOUNT_PERCENTAGE) / Constants.PERCENT_100) + "/" + (Constants.PERCENT_100 - Constants.DISCOUNT_PERCENTAGE) + "/" + ((Constants.PERCENT_100 - Constants.DISCOUNT_PERCENTAGE) / Constants.PERCENT_100) + "/" + product.getPrice());
         return product;
     }
 
-    private Product normalPrizeProduct(Product product) {
+    private Product normalPriceProduct(Product product) {
         product.setOnSalePrice(product.getPrice());
         return product;
     }
@@ -63,16 +62,16 @@ public class ProductServiceDefault implements ProductService {
         return productList;
     }
 
-    private ProductQuery generateSearchQuery(String query) {
-        ProductQuery productQuery = new ProductQuery();
+    private ProductRequest generateSearchQuery(String query) {
+        ProductRequest productRequest = new ProductRequest();
         if (Utils.isLong(query)) {
-            productQuery.setId(Long.parseLong(query));
+            productRequest.setId(Long.parseLong(query));
         }
         if (Utils.exists(query) && query.length() >= Constants.MIN_QUERY_CHARACTERS_SIZE) {
-            productQuery.setDescription(query);
-            productQuery.setBrand(query);
+            productRequest.setDescription(query);
+            productRequest.setBrand(query);
         }
-        return productQuery;
+        return productRequest;
     }
 
 }

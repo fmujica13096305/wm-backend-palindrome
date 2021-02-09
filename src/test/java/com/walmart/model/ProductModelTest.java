@@ -26,15 +26,6 @@ public class ProductModelTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
-    public void searchProduct() {
-        ProductModel m = new ProductModel();
-        ProductQuery productQuery = new ProductQuery();
-        productQuery.setId(1);
-        productQuery.setDescription("hqhoy");
-        System.out.println(m.searchProduct(productQuery).first());
-        System.out.println(m.searchProduct(productQuery).first().toJson());
-    }
 
     @Test
     public void testGiven_Preconditions_When_StateUnderTest_Then_ExpectedBehavior2() throws JsonProcessingException {
@@ -44,5 +35,15 @@ public class ProductModelTest {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         Product readValue = mapper.readValue(json, Product.class);
         System.out.println("readValue = " + readValue.toString());
+    }
+
+    @Test
+    public void searchProduct() {
+        ProductModel m = new ProductModel();
+        ProductRequest productRequest = new ProductRequest();
+        productRequest.setId(1);
+        productRequest.setDescription("hqhoy");
+        System.out.println(m.searchProduct(productRequest).first());
+        System.out.println(m.searchProduct(productRequest).first().toJson());
     }
 }

@@ -18,7 +18,6 @@ import static org.testng.Assert.fail;
 
 public class SeleniumWalmartTestCase {
     private WebDriver driver;
-    private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
@@ -26,7 +25,6 @@ public class SeleniumWalmartTestCase {
     public void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver2.exe");
         driver = new ChromeDriver();
-        baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -59,7 +57,7 @@ public class SeleniumWalmartTestCase {
     }
 
     @Test
-    public void testUntitledTestCase2() throws Exception {
+    public void testWalmartTestCase3() throws Exception {
         driver.get("https://lit-lowlands-69664.herokuapp.com/");
         driver.findElement(By.xpath("//div[@id='root']/div/div")).click();
         driver.findElement(By.id("buttonID")).click();

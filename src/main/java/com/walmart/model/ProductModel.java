@@ -18,11 +18,11 @@ import java.util.List;
 @Component
 public class ProductModel {
 
-    private static Document queryBuilder(ProductQuery productQuery) {
+    private static Document queryBuilder(ProductRequest productRequest) {
         List<Bson> conditions = new ArrayList<>();
-        checkAndAddEqualsCondition(conditions, productQuery.getId() > 0, "id", productQuery.getId());
-        checkAndAddContainsCondition(conditions, Utils.exists(productQuery.getBrand()), "brand", productQuery.getBrand());
-        checkAndAddContainsCondition(conditions, Utils.exists(productQuery.getDescription()), "description", productQuery.getDescription());
+        checkAndAddEqualsCondition(conditions, productRequest.getId() > 0, "id", productRequest.getId());
+        checkAndAddContainsCondition(conditions, Utils.exists(productRequest.getBrand()), "brand", productRequest.getBrand());
+        checkAndAddContainsCondition(conditions, Utils.exists(productRequest.getDescription()), "description", productRequest.getDescription());
         return new Document("$or", conditions);
     }
 
@@ -46,12 +46,12 @@ public class ProductModel {
         return Filters.regex(attribute, value, "i");
     }
 
-    public FindIterable<Document> searchProduct(ProductQuery productQuery) {
+    public FindIterable<Document> searchProduct(ProductRequest productRequest) {
         FindIterable<Document> searchResult;
         ApplicationContext ctx = new AnnotationConfigApplicationContext(MongoClientConfiguration.class);
         MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
         MongoCollection<Document> productCollection = mongoOperation.getCollection("products");
-        Document query = queryBuilder(productQuery);
+        Document query = queryBuilder(productRequest);
         searchResult = productCollection.find(query);
         for (Document document : searchResult) {
             System.out.println("Doc: " + document.toJson());

@@ -1,6 +1,6 @@
 package com.walmart.model;
 
-public class ProductQuery {
+public class ProductRequest {
     private long id;
     private String brand;
     private String description;

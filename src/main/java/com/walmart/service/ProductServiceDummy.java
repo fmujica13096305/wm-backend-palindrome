@@ -20,9 +20,9 @@ public class ProductServiceDummy implements ProductService {
         LOGGER.info("*****  IN  *****");
         System.out.println("*****  DUMMY ENTERED *****");
         List<Product> productList = new ArrayList<>();
-        Product product = getProduct("https://www.lider.cl/catalogo/images/bedRoomIcon.svg", 1, "Dummy Brand1", "Dummy Product1", 123);
-        Product product2 = getProduct("https://www.lider.cl/catalogo/images/toysIcon.svg", 2, "Dummy Brand2", "Dummy Product2", 124);
-        Product product3 = getProduct("https://www.lider.cl/catalogo/images/toysIcon.svg", 3, "Dummy Brand3", "Dummy Product3", 125);
+        Product product = getProduct("https://www.lider.cl/catalogo/images/bedRoomIcon.svg", 1, "Dummy Brand1", "Dummy Product1", 1);
+        Product product2 = getProduct("https://www.lider.cl/catalogo/images/toysIcon.svg", 2, "Dummy Brand2", "Dummy Product2", 2);
+        Product product3 = getProduct("https://www.lider.cl/catalogo/images/toysIcon.svg", 3, "Dummy Brand3", "Dummy Product3", 3);
         productList.add(product);
         productList.add(product2);
         productList.add(product3);
