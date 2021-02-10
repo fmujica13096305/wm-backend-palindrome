@@ -1,4 +1,4 @@
-# Getting Startedw with Walmart challenge 
+# Getting Started with Walmart challenge 
 
 This App was made with REACT as frontend , SPRINGBOOT Rest API as Backend ,Mongo db as no-sql database running under heroku cloud platform and All of those things were fitted into Docker.
 
@@ -18,6 +18,7 @@ Then just wait until the product appears.
 If you wanna check the code just go here:
 
 https://github.com/fmujica13096305/wm-frontend-palindrome
+
 https://github.com/fmujica13096305/wm-backend-palindrome
 
 if you wanna check the cloud platform where the app are running just go here: 
