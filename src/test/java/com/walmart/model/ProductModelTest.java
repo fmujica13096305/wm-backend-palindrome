@@ -28,7 +28,7 @@ public class ProductModelTest {
 
 
     @Test
-    public void testGiven_Preconditions_When_StateUnderTest_Then_ExpectedBehavior2() throws JsonProcessingException {
+    public void testGivenExpectedBehavior2() throws JsonProcessingException {
 
         String json = "{\"_id\": {\"$oid\": \"5fb58313dfcd05cca3fab8bd\"}, \"id\": 1, \"brand\": \"ooy eqrceli\", \"description\": \"rlñlw brhrka\", \"image\": \"www.lider.cl/catalogo/images/whiteLineIcon.svg\", \"price\": 498724}";
         ObjectMapper mapper = new ObjectMapper();
