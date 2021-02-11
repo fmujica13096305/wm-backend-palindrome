@@ -1,6 +1,6 @@
 # Getting Started with Walmart challenge 
 
-This App was made with REACT as frontend , SPRINGBOOT Rest API as Backend ,Mongo db as no-sql database running under heroku cloud platform and All of those things were fitted into Docker.
+This App was made under REACT as frontend , SPRINGBOOT Rest API as Backend ,Mongo db as no-sql database running under heroku cloud platform and All of those things were fitted into Docker.
 
 # How to Runing the application (usage)
 
@@ -23,3 +23,12 @@ https://github.com/fmujica13096305/wm-backend-palindrome
 
 if you wanna check the cloud platform where the app are running just go here: 
 https://dashboard.heroku.com/apps
+
+## Troubleshooting 
+
+if the app is not responding after a few seconds , please : 
+
+Logged in https://dashboard.heroku.com/apps , inside the "rocky-bastion-09181" App click “More” button in the upper right has a “Restart all dynos” option.
+then you should wait a few second and try once again 
+
+https://lit-lowlands-69664.herokuapp.com/
