@@ -11,7 +11,7 @@ https://lit-lowlands-69664.herokuapp.com/
 Once the browser's page is open just enter Id , brand or description you are looking for and click on "Find products button". 
 
 Then just wait until the product appears.
-(sometimes it take more time we expected to return data to the browser.
+(sometimes taking more time than expected to return data to the browser, see #Troubleshooting section if needed)
 
 ## Git and heroku repositories
 
