@@ -1,10 +1,13 @@
 package com.walmart.service;
 
 import com.walmart.dto.Product;
+import com.walmart.model.ProductRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,9 +24,85 @@ public class ProductServiceDefaultTest {
     }
 
     @Test
-    public void search() {
+    public void preconditions_validate_price_not_found() {
+        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
+        Product product = new Product();
+        product.setId(1);
+        List<Product> list = new ArrayList<>();
+        list.add(product);
+        String query = "181 ";
+        List<Product> validatePriceList = productServiceDefault.validatePrice(list, query);
+        for (Product price : validatePriceList) {
+            System.out.println(product.toString());
+        }
+        Product first = validatePriceList.get(0);
+
+        assertThat("price not found", first.getPrice() == first.getOnSalePrice(), is(true));
     }
 
+    @Test
+    public void preconditions_validate_palindrome() {
+        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
+        Product product = new Product();
+        product.setId(1);
+        product.setPrice(1000);
+        product.setBrand("mademsa");
+        product.setDescription("refrigerator");
+        List<Product> list = new ArrayList<>();
+        list.add(product);
+        String query = "141";
+        List<Product> validatePriceList = productServiceDefault.validatePrice(list, query);
+        for (Product price : validatePriceList) {
+            System.out.println(product.toString());
+        }
+        Product first = validatePriceList.get(0);
+
+        assertThat("is a palindrome", first.getPrice() != first.getOnSalePrice(), is(true));
+    }
+
+
+    @Test
+    public void preconditions_validate_is_not_palindrome() {
+        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
+        Product product = new Product();
+        product.setId(1);
+        product.setPrice(1000);
+        product.setOnSalePrice(56000);
+        product.setBrand("mademsa");
+        product.setDescription("refrigerator");
+        List<Product> list = new ArrayList<>();
+        list.add(product);
+        String query = "123 ";
+        List<Product> validatePriceList = productServiceDefault.validatePrice(list, query);
+        for (Product price : validatePriceList) {
+            System.out.println(product.toString());
+        }
+        Product first = validatePriceList.get(0);
+
+        assertThat("price not found", first.getPrice() == first.getOnSalePrice(), is(true));
+    }
+
+    @Test
+    public void preconditions_validate_request_when_MIN_QUERY_CHARACTERS_SIZE_Minor_3() {
+        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
+        String query = "12";
+        ProductRequest productRequest = productServiceDefault.generateSearchQuery(query);
+        System.out.println(productRequest.getBrand());
+
+        Assert.assertNull(productRequest.getBrand());
+
+    }
+
+    @Test
+    public void preconditions_validate_request_when_MIN_QUERY_CHARACTERS_SIZE_Mayor_3() {
+        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
+        String query = "12345";
+        ProductRequest productRequest = productServiceDefault.generateSearchQuery(query);
+        System.out.println(productRequest.getBrand());
+
+        Assert.assertEquals(productRequest.getBrand(), "12345");
+
+    }
 
     @Test
     public void preconditions_When_StateUnderTest_Then_NotDiscount() {
@@ -48,14 +127,4 @@ public class ProductServiceDefaultTest {
     }
 
 
-    @Test
-    public void preconditions_When_StateUnderTest_Then_ExpectedBehavior2() {
-        ProductServiceDefault productServiceDefault = new ProductServiceDefault();
-        List<Product> searchResult = productServiceDefault.search("bmfwuq");
-        for (Product product : searchResult) {
-            System.out.println(product.toString());
-        }
-        assertThat("bmfwuq search Should Bring 11 articules ", searchResult.size(), is(11));
-
-    }
 }

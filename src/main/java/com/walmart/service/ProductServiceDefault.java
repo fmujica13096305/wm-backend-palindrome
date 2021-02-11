@@ -26,7 +26,7 @@ public class ProductServiceDefault implements ProductService {
         return productList;
     }
 
-    private List<Product> validatePrice(List<Product> unCheckedProductList, String query) {
+    protected List<Product> validatePrice(List<Product> unCheckedProductList, String query) {
         List<Product> productListForSale = new ArrayList<>();
         if (Utils.isPalindrome(query)) {
             for (Product product : unCheckedProductList) {
@@ -62,7 +62,7 @@ public class ProductServiceDefault implements ProductService {
         return productList;
     }
 
-    private ProductRequest generateSearchQuery(String query) {
+    protected ProductRequest generateSearchQuery(String query) {
         ProductRequest productRequest = new ProductRequest();
         if (Utils.isLong(query)) {
             productRequest.setId(Long.parseLong(query));
